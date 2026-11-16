@@ -22,7 +22,7 @@ jobs:
         run: |
           xcodebuild clean build \
             -project "Reto 5 - Centro quejas sugerencias.xcodeproj" \
-            -scheme "Reto 5 - Centro quejas sugerencias" \
+            -target "Reto 5 - Centro quejas sugerencias" \
             -configuration Release \
             -sdk iphoneos \
             CODE_SIGN_IDENTITY="" \
