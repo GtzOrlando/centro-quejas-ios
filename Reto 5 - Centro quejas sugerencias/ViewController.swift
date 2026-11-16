@@ -16,7 +16,7 @@ class ViewController: UIViewController, WKUIDelegate {
         super.viewDidLoad()
         
         // PEGA AQUÍ TU URL DE LOCALTUNNEL + TU CARPETA
-        if let urlApp = URL(string: "https://yellow-bears-smile.loca.lt") {
+        if let urlApp = URL(string: "https://yellow-bears-smile.loca.lt/tuapp/") {
             let peticion = URLRequest(url: urlApp)
             visorWeb.load(peticion)
         }
