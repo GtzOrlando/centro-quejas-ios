@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Descargar el código fuente
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Configurar Xcode
         uses: maxim-lobanov/setup-xcode@v1
@@ -36,7 +36,7 @@ jobs:
           zip -r BuzonSugerencias.ipa Payload
 
       - name: Guardar Artefacto
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: BuzonSugerencias-App
           path: BuzonSugerencias.ipa
