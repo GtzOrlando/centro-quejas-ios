@@ -18,8 +18,8 @@ class ViewController: UIViewController, WKUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // IMPORTANTE: Pon tu IP real y el nombre de tu carpeta de XAMPP
-        if let urlApp = URL(string: "http://192.168.1.7/tuapp") {
+        // IMPORTANTE: URL pública para que el simulador web pueda cargar sin dar error de IP local
+        if let urlApp = URL(string: "https://uveg.edu.mx") {
             let peticion = URLRequest(url: urlApp)
             visorWeb.load(peticion)
         }
