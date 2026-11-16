@@ -22,7 +22,6 @@ jobs:
         run: |
           xcodebuild clean build \
             -project "Reto 5 - Centro quejas sugerencias.xcodeproj" \
-            -target "Reto 5 - Centro quejas sugerencias" \
             -configuration Release \
             -sdk iphoneos \
             CODE_SIGN_IDENTITY="" \
@@ -32,7 +31,7 @@ jobs:
       - name: Generar empaquetado .ipa
         run: |
           mkdir -p Payload
-          mv "build/Release-iphoneos/Reto 5 - Centro quejas sugerencias.app" Payload/
+          mv build/Release-iphoneos/*.app Payload/
           zip -r BuzonSugerencias.ipa Payload
 
       - name: Guardar Artefacto
