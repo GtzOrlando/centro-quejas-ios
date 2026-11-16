@@ -20,7 +20,6 @@ jobs:
 
       - name: Compilar el proyecto en modo Release
         run: |
-          cd "Reto 5 - Centro quejas sugerencias"
           xcodebuild clean build \
             -project "Reto 5 - Centro quejas sugerencias.xcodeproj" \
             -scheme "Reto 5 - Centro quejas sugerencias" \
@@ -32,10 +31,9 @@ jobs:
 
       - name: Generar empaquetado .ipa
         run: |
-          cd "Reto 5 - Centro quejas sugerencias"
           mkdir -p Payload
           mv "build/Release-iphoneos/Reto 5 - Centro quejas sugerencias.app" Payload/
-          zip -r ../BuzonSugerencias.ipa Payload
+          zip -r BuzonSugerencias.ipa Payload
 
       - name: Guardar Artefacto
         uses: actions/upload-artifact@v4
