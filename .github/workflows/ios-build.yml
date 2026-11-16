@@ -1,4 +1,4 @@
-name: iOS Build (Unsigned)
+name: iOS Build (Simulator)
 
 on:
   push:
@@ -18,24 +18,24 @@ jobs:
         with:
           xcode-version: latest-stable
 
-      - name: Compilar el proyecto en modo Release
+      - name: Compilar el proyecto para Simulador
         run: |
           xcodebuild clean build \
             -project "Reto 5 - Centro quejas sugerencias.xcodeproj" \
             -configuration Release \
-            -sdk iphoneos \
+            -sdk iphonesimulator \
+            -arch x86_64 \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO
 
-      - name: Generar empaquetado .ipa
+      - name: Generar empaquetado .zip
         run: |
-          mkdir -p Payload
-          mv build/Release-iphoneos/*.app Payload/
-          zip -r BuzonSugerencias.ipa Payload
-
+          cd build/Release-iphonesimulator
+          zip -r ../../BuzonSugerencias-Simulador.zip *.app
+          
       - name: Guardar Artefacto
         uses: actions/upload-artifact@v4
         with:
           name: BuzonSugerencias-App
-          path: BuzonSugerencias.ipa
+          path: BuzonSugerencias-Simulador.zip
