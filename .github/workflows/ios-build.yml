@@ -1,8 +1,9 @@
-name: iOS Build (Simulator)
+name: iOS Build (IPA sin firmar)
 
 on:
   push:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -18,24 +19,27 @@ jobs:
         with:
           xcode-version: latest-stable
 
-      - name: Compilar el proyecto para Simulador
+      - name: Archivar proyecto para dispositivo
         run: |
-          xcodebuild clean build \
+          xcodebuild clean archive \
             -project "Reto 5 - Centro quejas sugerencias.xcodeproj" \
+            -scheme "Reto 5 - Centro quejas sugerencias" \
             -configuration Release \
-            -sdk iphonesimulator \
-            -arch x86_64 \
+            -sdk iphoneos \
+            -destination "generic/platform=iOS" \
+            -archivePath "$PWD/build/App.xcarchive" \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO
 
-      - name: Generar empaquetado .zip
+      - name: Generar .ipa
         run: |
-          cd build/Release-iphonesimulator
-          zip -r ../../BuzonSugerencias-Simulador.zip *.app
-          
+          mkdir -p Payload
+          cp -R build/App.xcarchive/Products/Applications/*.app Payload/
+          zip -r BuzonSugerencias.ipa Payload
+
       - name: Guardar Artefacto
         uses: actions/upload-artifact@v4
         with:
-          name: BuzonSugerencias-App
-          path: BuzonSugerencias-Simulador.zip
+          name: BuzonSugerencias-IPA
+          path: BuzonSugerencias.ipa
